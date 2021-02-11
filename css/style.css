@@ -2,21 +2,55 @@
   margin: 0;
   padding: 0; }
 
+html, body {
+  height: 100%; }
+
 header {
-  background-color: #2E86C1;
-  color: white;
-  text-align: center;
-  padding: 1em; }
+  display: flex;
+  background-color: #134013;
+  color: #e29f2f;
+  justify-content: space-around;
+  height: 10vh;
+  align-items: center; }
 
 main {
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin: auto; }
+  margin: auto;
+  color: #325a2f;
+  height: 90vh; }
 
 .requestMenu {
+  flex-direction: column;
+  margin: auto; }
+  .requestMenu button {
+    margin-top: 1em;
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    border: 2px solid #3b6b38;
+    color: #3b6b38;
+    background-color: #daeecc;
+    font-weight: bold; }
+  .requestMenu button:hover {
+    background-color: #bee1a6; }
+  .requestMenu button:focus {
+    border: 2px solid #558c2f;
+    color: #c4dfc3;
+    background-color: #558c2f;
+    outline: none; }
+
+.newShopContainer {
   display: flex;
-  flex-direction: column; }
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1em; }
+  .newShopContainer button {
+    border: 0px solid transparent;
+    background-color: transparent;
+    cursor: pointer; }
 
 .loader {
   border: 16px solid #f3f3f3;
