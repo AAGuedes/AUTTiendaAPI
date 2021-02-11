@@ -1,8 +1,24 @@
-var gulp = require('gulp');
-var browserSync = require('browser-sync').create();
-var sass = require('gulp-sass');
+const gulp = require('gulp');
+const browserSync = require('browser-sync').create();
+const sass = require('gulp-sass');
+const jsdoc = require('gulp-jsdoc3');
+const eslint = require('gulp-eslint');
 
-// Compile sass into CSS & auto-inject into browsers
+// eslint
+gulp.task('eslint', () => {
+    return gulp.src(['./js/**/*.js'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
+
+// jsdoc 3
+gulp.task('doc', function (cb) {
+    gulp.src('./js/**/*.js')
+        .pipe(jsdoc(cb));
+});
+
+// sass compile + browsersync injection
 gulp.task('sass', function () {
     return gulp.src("./sass/*.sass")
         .pipe(sass())
@@ -10,7 +26,7 @@ gulp.task('sass', function () {
         .pipe(browserSync.stream());
 });
 
-// Static Server + watching scss/html files
+// browsersync + sass compile
 gulp.task('serve', function () {
 
     browserSync.init({
@@ -22,4 +38,4 @@ gulp.task('serve', function () {
 });
 
 // Default tasks
-gulp.task('default', gulp.series(['serve'], 'sass'));
+gulp.task('default', gulp.series(['serve'], 'sass', 'eslint'));
