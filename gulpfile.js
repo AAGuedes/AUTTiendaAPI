@@ -20,21 +20,20 @@ gulp.task('doc', function (cb) {
 
 // sass compile + browsersync injection
 gulp.task('sass', function () {
-    return gulp.src("./sass/*.sass")
+    return gulp.src('./sass/*.sass')
         .pipe(sass())
-        .pipe(gulp.dest("./css"))
+        .pipe(gulp.dest('./css'))
         .pipe(browserSync.stream());
 });
 
 // browsersync + sass compile
 gulp.task('serve', function () {
-
     browserSync.init({
-        server: "./."
+        server: './.'
     });
-
-    gulp.watch("./sass/**/*.sass", gulp.series(['sass']));
-    gulp.watch("./*.html").on('change', browserSync.reload);
+    gulp.watch('./js/**/*.js'), gulp.series(['eslint']);
+    gulp.watch('./sass/**/*.sass', gulp.series(['sass']));
+    gulp.watch(['./*.html', './js/**/*.js', './sass/**/*.sass']).on('change', browserSync.reload);
 });
 
 // Default tasks
