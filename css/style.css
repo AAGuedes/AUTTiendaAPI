@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/open-sans-v18-latin-regular.woff") format("woff"); }
+
 * {
   margin: 0;
   padding: 0; }
@@ -11,7 +17,8 @@ header {
   color: #e29f2f;
   justify-content: space-around;
   height: 10vh;
-  align-items: center; }
+  align-items: center;
+  margin-bottom: 1em; }
 
 main {
   display: flex;
@@ -25,15 +32,15 @@ main {
   flex-direction: column;
   margin: auto; }
   .requestMenu button {
-    margin-top: 1em;
-    width: 100%;
+    margin: 0.5em 0 0.5em 0;
     padding: 0.5em;
     border-radius: 0.5em;
     cursor: pointer;
     border: 2px solid #3b6b38;
     color: #3b6b38;
     background-color: #daeecc;
-    font-weight: bold; }
+    font-weight: bold;
+    width: 100%; }
   .requestMenu button:hover {
     background-color: #bee1a6; }
   .requestMenu button:focus {
@@ -46,15 +53,81 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 1em; }
-  .newShopContainer button {
-    border: 0px solid transparent;
-    background-color: transparent;
-    cursor: pointer; }
+  align-items: center; }
+  .newShopContainer .newShopButton, .newShopContainer .searchButton {
+    margin: 0.5em 0 0.5em 0;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    border: 2px solid #3b6b38;
+    color: #3b6b38;
+    background-color: #daeecc;
+    font-weight: bold; }
+  .newShopContainer .newShopButton:hover, .newShopContainer .searchButton:hover {
+    background-color: #bee1a6; }
+  .newShopContainer .newShopButton:focus, .newShopContainer .searchButton:focus {
+    border: 2px solid #558c2f;
+    color: #c4dfc3;
+    background-color: #558c2f;
+    outline: none; }
+  .newShopContainer .searchButton:disabled {
+    border: 2px solid #83bc80;
+    color: #83bc80; }
+  .newShopContainer .searchInput {
+    border-radius: 0.5em;
+    border: 2px solid #3b6b38;
+    padding: 0.5em;
+    margin-right: 0.5em;
+    outline: none; }
+  .newShopContainer img {
+    height: 12px; }
+
+.newShopForm {
+  border: 2px solid #bee1a6;
+  border-radius: 0.25em;
+  padding: 0.5em; }
+  .newShopForm h1 {
+    margin: 0.25em; }
+  .newShopForm .formRow {
+    display: flex;
+    justify-content: space-between; }
+    .newShopForm .formRow div {
+      display: flex;
+      flex-direction: column;
+      flex: 1; }
+      .newShopForm .formRow div label {
+        margin: 0 0.5em; }
+      .newShopForm .formRow div input {
+        margin: 0 0.5em 1em 0.5em;
+        border-radius: 0.5em;
+        border: 2px solid #3b6b38;
+        padding: 0.5em;
+        outline: none; }
+  .newShopForm .formRowSubmit {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; }
+    .newShopForm .formRowSubmit #addShopButton {
+      margin: 0.5em 0 0.5em 0;
+      padding: 0.5em;
+      border-radius: 0.5em;
+      cursor: pointer;
+      border: 2px solid #3b6b38;
+      color: #3b6b38;
+      background-color: #daeecc;
+      font-weight: bold;
+      margin-right: 0.5em; }
+    .newShopForm .formRowSubmit #addShopButton:hover {
+      background-color: #bee1a6; }
+    .newShopForm .formRowSubmit #addShopButton:focus {
+      border: 2px solid #558c2f;
+      color: #c4dfc3;
+      background-color: #558c2f;
+      outline: none; }
 
 .loader {
   border: 16px solid #f3f3f3;
-  border-top: 16px solid #3498db;
+  border-top: 16px solid #134013;
   border-radius: 50%;
   width: 120px;
   height: 120px;

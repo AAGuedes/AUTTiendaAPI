@@ -36,12 +36,13 @@ function formElement(e, id, text) {
 
 /**
  * Agrega iconos
+ * @param {*} e Posición en el DOM del elemento
  * @param {*} iconSrc URL del icono
  */
-function createButton(iconSrc) {
-    element(main.lastElementChild.lastElementChild.lastElementChild, 'button');
-    element(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'img');
-    attribute(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'src', iconSrc);
+function createButton(e, iconSrc) {
+    element(e, 'button');
+    element(e.lastElementChild, 'img');
+    attribute(e.lastElementChild.lastElementChild, 'src', iconSrc);
 }
 
 /**
@@ -114,9 +115,8 @@ function shopList(response) {
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'placeholder', 'ID de Tienda');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'searchInput');
 
-    element(main.lastElementChild.lastElementChild, 'button');
+    createButton(main.lastElementChild.lastElementChild, 'img/search.svg');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'searchButton');
-    createButton('img/search.svg');
 
     // Elementos del formulario
     element(main, 'div');
@@ -125,15 +125,23 @@ function shopList(response) {
     main.lastElementChild.lastElementChild.textContent = 'Nueva Empresa';
     element(main.lastElementChild, 'form');
     element(main.lastElementChild.lastElementChild, 'div');
-    formElement(main.lastElementChild.lastElementChild.lastElementChild, 'nombreTienda', 'Nombre');
-    formElement(main.lastElementChild.lastElementChild.lastElementChild, 'direccion', 'Dirección');
+    attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'formRow');
+    element(main.lastElementChild.lastElementChild.lastElementChild, 'div');
+    formElement(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'nombreTienda', 'Nombre');
+    element(main.lastElementChild.lastElementChild.lastElementChild, 'div');
+    formElement(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'direccion', 'Dirección');
     element(main.lastElementChild.lastElementChild, 'div');
-    formElement(main.lastElementChild.lastElementChild.lastElementChild, 'localidad', 'Localidad');
-    formElement(main.lastElementChild.lastElementChild.lastElementChild, 'telefono', 'Teléfono');
+    attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'formRow');
+    element(main.lastElementChild.lastElementChild.lastElementChild, 'div');
+    formElement(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'localidad', 'Localidad');
+    element(main.lastElementChild.lastElementChild.lastElementChild, 'div');
+    formElement(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'telefono', 'Teléfono');
     element(main.lastElementChild.lastElementChild, 'div');
+    attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'formRowSubmit');
     element(main.lastElementChild.lastElementChild.lastElementChild, 'input');
     attribute(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'type', 'submit');
     attribute(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'value', 'Añadir Tienda');
+    attribute(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'id', 'addShopButton');
 
     response.forEach(e => {
         element(main, 'div');
@@ -147,9 +155,9 @@ function shopList(response) {
         main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.textContent = e.nombreTienda;
 
         element(main.lastElementChild.lastElementChild, 'div');
-        createButton('img/pencil-square.svg');
+        createButton(main.lastElementChild.lastElementChild.lastElementChild, 'img/pencil-square.svg');
         main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { editShop(e.idTienda) });
-        createButton('img/trash-fill.svg');
+        createButton(main.lastElementChild.lastElementChild.lastElementChild, 'img/trash-fill.svg');
         main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { deleteShop(e.idTienda) });
 
         element(main.lastElementChild, 'div');
