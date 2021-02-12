@@ -96,29 +96,29 @@ for (let i = 0; i < buttonContent.length; i++) {
 })
 
 /**
- * Crea la lista de tiendas en el DOM (Incompleto - Sin optimizar)
+ * Agrega al DOM el menu de tienda
  */
-function shopList(response) {
-    // New Shop button & search
+function shopMenu() {
     element(main, 'div');
     attribute(main.lastElementChild, 'class', 'newShopContainer');
-
     element(main.lastElementChild, 'div');
     element(main.lastElementChild.lastElementChild, 'button');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'newShopButton');
     main.lastElementChild.lastElementChild.lastElementChild.textContent = 'Nueva tienda';
     main.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { newShop() });
-
     element(main.lastElementChild, 'div');
     element(main.lastElementChild.lastElementChild, 'input');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'type', 'text');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'placeholder', 'ID de Tienda');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'searchInput');
-
     createButton(main.lastElementChild.lastElementChild, 'img/search.svg');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'searchButton');
+}
 
-    // Elementos del formulario
+/**
+ * Agrega al DOM el formulario de nueva tienda
+ */
+function shopForm() {
     element(main, 'div');
     attribute(main.lastElementChild, 'class', 'newShopForm');
     element(main.lastElementChild, 'h1');
@@ -142,30 +142,41 @@ function shopList(response) {
     attribute(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'type', 'submit');
     attribute(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'value', 'Añadir Tienda');
     attribute(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'id', 'addShopButton');
+}
 
+/**
+ * Agrega al DOM una tienda
+ * @param {*} e Elemento del response
+ */
+function shop(e) {
+    element(main, 'div');
+    attribute(main.lastElementChild, 'class', 'shop');
+    element(main.lastElementChild, 'div');
+    attribute(main.lastElementChild.lastElementChild, 'class', 'shopHeader');
+    element(main.lastElementChild.lastElementChild, 'div');
+    element(main.lastElementChild.lastElementChild.lastElementChild, 'h1');
+    main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.textContent = e.nombreTienda;
+    element(main.lastElementChild.lastElementChild, 'div');
+    createButton(main.lastElementChild.lastElementChild.lastElementChild, 'img/pencil-square.svg');
+    main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { editShop(e.idTienda) });
+    createButton(main.lastElementChild.lastElementChild.lastElementChild, 'img/trash-fill.svg');
+    main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { deleteShop(e.idTienda) });
+    element(main.lastElementChild, 'div');
+    attribute(main.lastElementChild.lastElementChild, 'class', 'shopBody');
+    element(main.lastElementChild.lastElementChild, 'p');
+    main.lastElementChild.lastElementChild.lastElementChild.textContent = "Dirección: " + e.direccion + ' (' + e.localidad + ')';
+    element(main.lastElementChild.lastElementChild, 'p');
+    main.lastElementChild.lastElementChild.lastElementChild.textContent = "Teléfono: " + e.telefono;
+}
+
+/**
+ * Crea la lista de tiendas en el DOM
+ */
+function shopList(response) {
+    shopMenu();
+    shopForm();
     response.forEach(e => {
-        element(main, 'div');
-        attribute(main.lastElementChild, 'class', 'shop');
-
-        element(main.lastElementChild, 'div');
-        attribute(main.lastElementChild.lastElementChild, 'class', 'shopHeader');
-
-        element(main.lastElementChild.lastElementChild, 'div');
-        element(main.lastElementChild.lastElementChild.lastElementChild, 'h1');
-        main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.textContent = e.nombreTienda;
-
-        element(main.lastElementChild.lastElementChild, 'div');
-        createButton(main.lastElementChild.lastElementChild.lastElementChild, 'img/pencil-square.svg');
-        main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { editShop(e.idTienda) });
-        createButton(main.lastElementChild.lastElementChild.lastElementChild, 'img/trash-fill.svg');
-        main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { deleteShop(e.idTienda) });
-
-        element(main.lastElementChild, 'div');
-        attribute(main.lastElementChild.lastElementChild, 'class', 'shopBody');
-        element(main.lastElementChild.lastElementChild, 'p');
-        main.lastElementChild.lastElementChild.lastElementChild.textContent = "Dirección: " + e.direccion + ' (' + e.localidad + ')';
-        element(main.lastElementChild.lastElementChild, 'p');
-        main.lastElementChild.lastElementChild.lastElementChild.textContent = "Teléfono: " + e.telefono;
+        shop(e);
     });
 }
 
