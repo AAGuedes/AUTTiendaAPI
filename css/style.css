@@ -84,8 +84,9 @@ main {
 
 .newShopForm {
   border: 2px solid #bee1a6;
-  border-radius: 0.25em;
-  padding: 0.5em; }
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin: 0.5em 0; }
   .newShopForm h1 {
     margin: 0.25em; }
   .newShopForm .formRow {
@@ -124,6 +125,37 @@ main {
       color: #c4dfc3;
       background-color: #558c2f;
       outline: none; }
+
+.shop {
+  border: 2px solid #bee1a6;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  margin: 0.5em 0; }
+  .shop .shopHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .shop .shopHeader button {
+      margin: 0.5em 0 0.5em 0;
+      padding: 0.5em;
+      border-radius: 0.5em;
+      cursor: pointer;
+      border: 2px solid #3b6b38;
+      color: #3b6b38;
+      background-color: #daeecc;
+      font-weight: bold;
+      margin-left: 0.5em; }
+    .shop .shopHeader button:hover {
+      background-color: #bee1a6; }
+    .shop .shopHeader button:focus {
+      border: 2px solid #558c2f;
+      color: #c4dfc3;
+      background-color: #558c2f;
+      outline: none; }
+  .shop img {
+    height: 12px; }
+  .shop .shopBody p {
+    margin: 0.5em 0; }
 
 .loader {
   border: 16px solid #f3f3f3;
