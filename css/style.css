@@ -49,12 +49,12 @@ main {
     background-color: #558c2f;
     outline: none; }
 
-.newShopContainer {
+.newShopMenu {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center; }
-  .newShopContainer .newShopButton, .newShopContainer .searchButton {
+  .newShopMenu .newShopButton, .newShopMenu .searchButton {
     margin: 0.5em 0 0.5em 0;
     padding: 0.5em;
     border-radius: 0.5em;
@@ -63,52 +63,55 @@ main {
     color: #3b6b38;
     background-color: #daeecc;
     font-weight: bold; }
-  .newShopContainer .newShopButton:hover, .newShopContainer .searchButton:hover {
+  .newShopMenu .newShopButton:hover, .newShopMenu .searchButton:hover {
     background-color: #bee1a6; }
-  .newShopContainer .newShopButton:focus, .newShopContainer .searchButton:focus {
+  .newShopMenu .newShopButton:focus, .newShopMenu .searchButton:focus {
     border: 2px solid #558c2f;
     color: #c4dfc3;
     background-color: #558c2f;
     outline: none; }
-  .newShopContainer .searchButton:disabled {
+  .newShopMenu .searchButton:disabled {
     border: 2px solid #83bc80;
     color: #83bc80; }
-  .newShopContainer .searchInput {
+  .newShopMenu .searchInput {
     border-radius: 0.5em;
     border: 2px solid #3b6b38;
     padding: 0.5em;
     margin-right: 0.5em;
     outline: none; }
-  .newShopContainer img {
+  .newShopMenu img {
     height: 12px; }
 
-.newShopForm {
+.newShopContainer {
   border: 2px solid #bee1a6;
   border-radius: 0.5em;
   padding: 0.5em;
   margin: 0.5em 0; }
-  .newShopForm h1 {
+  .newShopContainer h1 {
     margin: 0.25em; }
-  .newShopForm .formRow {
+  .newShopContainer .formRow {
     display: flex;
     justify-content: space-between; }
-    .newShopForm .formRow div {
+    .newShopContainer .formRow div {
       display: flex;
       flex-direction: column;
       flex: 1; }
-      .newShopForm .formRow div label {
+      .newShopContainer .formRow div label {
         margin: 0 0.5em; }
-      .newShopForm .formRow div input {
+      .newShopContainer .formRow div input {
         margin: 0 0.5em 1em 0.5em;
         border-radius: 0.5em;
         border: 2px solid #3b6b38;
         padding: 0.5em;
         outline: none; }
-  .newShopForm .formRowSubmit {
+      .newShopContainer .formRow div small {
+        color: red;
+        margin: 0 0 0.5em 0.5em; }
+  .newShopContainer .formRowSubmit {
     display: flex;
     flex-direction: column;
     align-items: flex-end; }
-    .newShopForm .formRowSubmit #addShopButton {
+    .newShopContainer .formRowSubmit #addShopButton {
       margin: 0.5em 0 0.5em 0;
       padding: 0.5em;
       border-radius: 0.5em;
@@ -118,9 +121,9 @@ main {
       background-color: #daeecc;
       font-weight: bold;
       margin-right: 0.5em; }
-    .newShopForm .formRowSubmit #addShopButton:hover {
+    .newShopContainer .formRowSubmit #addShopButton:hover {
       background-color: #bee1a6; }
-    .newShopForm .formRowSubmit #addShopButton:focus {
+    .newShopContainer .formRowSubmit #addShopButton:focus {
       border: 2px solid #558c2f;
       color: #c4dfc3;
       background-color: #558c2f;

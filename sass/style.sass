@@ -1,0 +1,173 @@
+$header-color: #134013
+$header-text-color: #e29f2f
+
+$main-color: #daeecc
+$main-text-color: #3b6b38
+
+@font-face
+    font-family: 'Open Sans'
+    font-style: normal
+    font-weight: 400
+    src: url('../fonts/open-sans-v18-latin-regular.woff') format('woff')
+
+*
+    margin: 0
+    padding: 0
+
+html, body
+    height: 100%
+
+@mixin button
+    margin: 0.5em 0 0.5em 0
+    padding: 0.5em
+    border-radius: 0.5em
+    cursor: pointer
+    border: 2px solid $main-text-color
+    color: $main-text-color
+    background-color: $main-color
+    font-weight: bold
+
+@mixin button-hover
+    background-color: darken($main-color, 10%)
+
+@mixin button-focus
+    border: 2px solid darken($main-color, 50%)
+    color: lighten($main-text-color, 50%)
+    background-color: darken($main-color, 50%)
+    outline: none
+
+@mixin button-disabled
+    border: 2px solid lighten($main-text-color, 30%)
+    color: lighten($main-text-color, 30%)
+
+// HEADER
+header
+    display: flex
+    background-color: $header-color
+    color: $header-text-color
+    justify-content: space-around
+    height: 10vh
+    align-items: center
+    margin-bottom: 1em
+
+// MAIN
+main
+    display: flex
+    flex-direction: column
+    width: 80%
+    margin: auto
+    color: darken($main-text-color, 5%)
+    height: 90vh
+
+// REQUEST MENU
+.requestMenu
+    flex-direction: column
+    margin: auto
+    button
+        @include button
+        width: 100%
+    button:hover
+        @include button-hover
+    button:focus
+        @include button-focus
+
+// NEW SHOP CONTAINER
+.newShopMenu
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    .newShopButton, .searchButton
+        @include button
+    .newShopButton:hover, .searchButton:hover
+        @include button-hover
+    .newShopButton:focus, .searchButton:focus
+        @include button-focus
+    .searchButton:disabled
+        @include button-disabled
+    .searchInput
+        border-radius: 0.5em
+        border: 2px solid $main-text-color
+        padding: 0.5em
+        margin-right: 0.5em
+        outline: none
+    // ICON - ADJUSTED SIZE TO ALIGN WITH INPUT
+    img
+        height: 12px
+
+// NEW SHOP FORM
+.newShopContainer
+    border: 2px solid darken($main-color, 10%)
+    border-radius: 0.5em
+    padding: 0.5em
+    margin: 0.5em 0
+    h1
+        margin: 0.25em
+    .formRow
+        display: flex
+        justify-content: space-between
+        div
+            display: flex
+            flex-direction: column
+            flex: 1
+            label
+                margin: 0 0.5em
+            input
+                margin: 0 0.5em 1em 0.5em
+                border-radius: 0.5em
+                border: 2px solid $main-text-color
+                padding: 0.5em
+                outline: none
+            small
+                color: red
+                margin: 0 0 0.5em 0.5em
+    .formRowSubmit
+        display: flex
+        flex-direction: column
+        align-items: flex-end
+        #addShopButton
+            @include button
+            margin-right: 0.5em
+        #addShopButton:hover
+            @include button-hover
+        #addShopButton:focus
+            @include button-focus
+
+// SHOP
+.shop
+    border: 2px solid darken($main-color, 10%)
+    border-radius: 0.5em
+    padding: 0.5em
+    margin: 0.5em 0
+    .shopHeader
+        display: flex
+        justify-content: space-between
+        align-items: center
+        button
+            @include button
+            margin-left: 0.5em
+        button:hover
+            @include button-hover
+        button:focus
+            @include button-focus
+    img
+        height: 12px
+    .shopBody
+        p
+            margin: 0.5em 0
+
+// LOADER
+.loader
+    border: 16px solid #f3f3f3
+    border-top: 16px solid #134013
+    border-radius: 50%
+    width: 120px
+    height: 120px
+    animation: spin 1.5s linear infinite
+    margin: auto
+
+@keyframes spin
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(360deg);@keyframes spin

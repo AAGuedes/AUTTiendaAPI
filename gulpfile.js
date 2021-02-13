@@ -31,7 +31,6 @@ gulp.task('serve', function () {
     browserSync.init({
         server: './.'
     });
-    // 
     gulp.watch('./js/**/*.js'), gulp.series(['eslint']);
     gulp.watch('./sass/**/*.sass', gulp.series(['sass']));
     gulp.watch(['./*.html', './js/**/*.js', './sass/**/*.sass']).on('change', browserSync.reload);
