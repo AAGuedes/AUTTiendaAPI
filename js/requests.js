@@ -92,8 +92,23 @@ export function postTienda(requestTypeValue, formData) {
     }
 }
 
-export function putTienda() {
-
+export function putTienda(requestTypeValue, formData) {
+    cleanMain();
+    displayLoader();
+    switch (requestTypeValue) {
+        // XHR
+        case 0:
+            console.log('putTienda con XHR')
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    hideLoader();
+                    getTiendas(requestTypeValue);
+                }
+            }
+            xhr.open('PUT', tiendas);
+            xhr.send(JSON.stringify(formData));
+            break;
+    }
 }
 
 export function deleteTienda(requestTypeValue, id) {

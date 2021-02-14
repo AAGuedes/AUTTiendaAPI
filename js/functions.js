@@ -1,5 +1,5 @@
 import { getTiendas, getTienda, deleteTienda } from './requests.js';
-import { checkShopName, checkShopAdress, checkShopLocation, checkShopPhoneNumber, checkFormSubmit } from './shopForm.js';
+import { checkShopName, checkEditShopName, checkShopAdress, checkEditShopAdress, checkShopLocation, checkEditShopLocation, checkShopPhoneNumber, checkEditShopPhoneNumber, checkFormSubmit, checkEditFormSubmit } from './shopForm.js';
 
 const main = document.getElementsByTagName('main')[0];
 export var requestTypeValue;
@@ -188,7 +188,6 @@ function shopMenu() {
     main.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { getTienda(requestTypeValue) });
 }
 
-
 /**
  * Agrega al DOM el formulario de nueva tienda
  */
@@ -201,15 +200,15 @@ function shopForm() {
     attribute(main.lastElementChild.lastElementChild, 'id', 'newShopForm');
     element(main.lastElementChild.lastElementChild, 'div');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'formRow');
-    shopFormElement('nombreTienda', 'Nombre', '^[\\w\\d]{0,}[\\s]{0,1}([\\w\\d]{0,}[\\s]{0,1}){0,}[^ -]$', 'nombreTiendaHelper');
+    shopFormElement(main.lastElementChild.lastElementChild.lastElementChild, 'nombreTienda', 'Nombre', '^[\\w\\d]{0,}[\\s]{0,1}([\\w\\d]{0,}[\\s]{0,1}){0,}[^ -]$', 'nombreTiendaHelper');
     document.getElementById('nombreTienda').addEventListener('input', ()=> { checkShopName() });
-    shopFormElement('direccion', 'Dirección', '^[A-Za-z]*(\\s?[A-Za-z]*[0-9]*)*[^\\s]$', 'direccionHelper');
+    shopFormElement(main.lastElementChild.lastElementChild.lastElementChild, 'direccion', 'Dirección', '^[A-Za-z]*(\\s?[A-Za-z]*[0-9]*)*[^\\s]$', 'direccionHelper');
     document.getElementById('direccion').addEventListener('input', ()=> { checkShopAdress() });
     element(main.lastElementChild.lastElementChild, 'div');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'formRow');
-    shopFormElement('localidad', 'Localidad', '^[A-Za-z]{0,}([ ]{0,1}[A-Za-z]{0,}){0,}[^ ]$', 'localidadHelper');
+    shopFormElement(main.lastElementChild.lastElementChild.lastElementChild, 'localidad', 'Localidad', '^[A-Za-z]{0,}([ ]{0,1}[A-Za-z]{0,}){0,}[^ ]$', 'localidadHelper');
     document.getElementById('localidad').addEventListener('input', ()=> { checkShopLocation() });
-    shopFormElement('telefono', 'Teléfono', '^[689]\\d{8}$', 'telefonoHelper');
+    shopFormElement(main.lastElementChild.lastElementChild.lastElementChild, 'telefono', 'Teléfono', '^[689]\\d{8}$', 'telefonoHelper');
     document.getElementById('telefono').addEventListener('input', ()=> { checkShopPhoneNumber() });
     element(main.lastElementChild.lastElementChild, 'div');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'formRowSubmit');
@@ -222,14 +221,15 @@ function shopForm() {
 
 /**
  * Crea un elemento del formulario con formato especificado
+ * @param {*} container Contenedor padre
  * @param {*} id Id del input
  * @param {*} label Label que acompaña al input
  * @param {*} regexp Expresión regular del input
  * @param {*} idHelper Id del helper
  */
-function shopFormElement(id, label, regexp, idHelper) {
-    element(main.lastElementChild.lastElementChild.lastElementChild, 'div');
-    formElement(main.lastElementChild.lastElementChild.lastElementChild.lastElementChild, id, label, regexp, idHelper);
+function shopFormElement(container, id, label, regexp, idHelper) {
+    element(container, 'div');
+    formElement(container.lastElementChild, id, label, regexp, idHelper);
 }
 
 /**
@@ -239,6 +239,7 @@ function shopFormElement(id, label, regexp, idHelper) {
 export function shop(e) {
     element(main, 'div');
     attribute(main.lastElementChild, 'class', 'shop');
+    attribute(main.lastElementChild, 'id', e.idTienda);
     element(main.lastElementChild, 'div');
     attribute(main.lastElementChild.lastElementChild, 'class', 'shopHeader');
     element(main.lastElementChild.lastElementChild, 'div');
@@ -246,7 +247,7 @@ export function shop(e) {
     main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.textContent = e.nombreTienda;
     element(main.lastElementChild.lastElementChild, 'div');
     createButton(main.lastElementChild.lastElementChild.lastElementChild, 'img/pencil-square.svg');
-    main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { editShop(e.idTienda) });
+    main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { editShop(e) });
     createButton(main.lastElementChild.lastElementChild.lastElementChild, 'img/trash-fill.svg');
     main.lastElementChild.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { deleteShop(e) });
     element(main.lastElementChild, 'div');
@@ -275,18 +276,58 @@ function newShop() {
 }
 
 /**
- * Edita una tienda (Incompleto)
- * @param {*} idTienda 
+ * 
+ * @param {*} e Evento
+ * @param {*} s Fuente
  */
-function editShop(idTienda) {
-    console.log('Edit shop: ' + idTienda)
+function editShop(e) {
+    let idTienda = e.idTienda;
+    let shop = document.getElementById(idTienda);
+
+    // Si el formulario existe, lo borra
+    if(document.getElementById('editShopContainer') != null) {
+        document.getElementById('editShopContainer').remove();
+    }
+
+    // General el formulario
+    element(shop, 'div');
+    attribute(shop.lastElementChild, 'id', 'editShopContainer');
+    attribute(shop.lastElementChild, 'class', 'newShopContainer');
+    element(shop.lastElementChild, 'h1');
+    shop.lastElementChild.lastElementChild.textContent = 'Editar Empresa';
+    element(shop.lastElementChild, 'form');
+    attribute(shop.lastElementChild.lastElementChild, 'id', 'editShopForm');
+    element(shop.lastElementChild.lastElementChild, 'div');
+    attribute(shop.lastElementChild.lastElementChild.lastElementChild, 'class', 'formRow');
+    shopFormElement(shop.lastElementChild.lastElementChild.lastElementChild, 'editNombreTienda', 'Nombre', '^[\\w\\d]{0,}[\\s]{0,1}([\\w\\d]{0,}[\\s]{0,1}){0,}[^ -]$', 'editNombreTiendaHelper');
+    document.getElementById('editNombreTienda').addEventListener('input', ()=> { checkEditShopName() });
+    shopFormElement(shop.lastElementChild.lastElementChild.lastElementChild, 'editDireccion', 'Dirección', '^[A-Za-z]*(\\s?[A-Za-z]*[0-9]*)*[^\\s]$', 'editDireccionHelper');
+    document.getElementById('editDireccion').addEventListener('input', ()=> { checkEditShopAdress() });
+    element(shop.lastElementChild.lastElementChild, 'div');
+    attribute(shop.lastElementChild.lastElementChild.lastElementChild, 'class', 'formRow');
+    shopFormElement(shop.lastElementChild.lastElementChild.lastElementChild, 'editLocalidad', 'Localidad', '^[A-Za-z]{0,}([ ]{0,1}[A-Za-z]{0,}){0,}[^ ]$', 'editLocalidadHelper');
+    document.getElementById('editLocalidad').addEventListener('input', ()=> { checkEditShopLocation() });
+    shopFormElement(shop.lastElementChild.lastElementChild.lastElementChild, 'editTelefono', 'Teléfono', '^[689]\\d{8}$', 'editTelefonoHelper');
+    document.getElementById('editTelefono').addEventListener('input', ()=> { checkEditShopPhoneNumber() });
+    element(shop.lastElementChild.lastElementChild, 'div');
+    attribute(shop.lastElementChild.lastElementChild.lastElementChild, 'class', 'formRowSubmit');
+    element(shop.lastElementChild.lastElementChild.lastElementChild, 'input');
+    attribute(shop.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'type', 'submit');
+    attribute(shop.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'value', 'Editar Tienda');
+    attribute(shop.lastElementChild.lastElementChild.lastElementChild.lastElementChild, 'id', 'editShopButton');
+    document.getElementById('editShopButton').addEventListener('click', (e) => { checkEditFormSubmit(e, idTienda); });
+
+    // Agrega información de la tienda al formulario
+    document.getElementById('editNombreTienda').value = e.nombreTienda;
+    document.getElementById('editDireccion').value = e.direccion;
+    document.getElementById('editLocalidad').value = e.localidad;
+    document.getElementById('editTelefono').value = e.telefono;
 }
 
 /**
- * Borra una tienda (Incompleto)
- * @param {*} idTienda 
+ * Borra una tienda pidiendo confirmación
+ * @param {*} e Evento
  */
 function deleteShop(e) {
-    console.log(e);
     confirm('¿Seguro que quiere borrar la tienda' + e.nombreTienda + '?') ? deleteTienda(requestTypeValue, e.idTienda) : null;
 }
