@@ -3,6 +3,7 @@ import { checkShopName, checkEditShopName, checkShopAdress, checkEditShopAdress,
 
 const main = document.getElementsByTagName('main')[0];
 export var requestTypeValue;
+var searchValue = 0;
 var error = "border-color: red; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 0, 0, 0.6);";
 var success = "border-color: green; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 255, 0, 0.6);";
 
@@ -11,7 +12,7 @@ var success = "border-color: green; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) i
  * @param {*} element Elemento padre
  * @param {*} child Elemento hijo
  */
-function element(element, child) {
+export function element(element, child) {
     element.appendChild(document.createElement(child));
 }
 
@@ -21,7 +22,7 @@ function element(element, child) {
  * @param {*} attribute Tipo de atributo
  * @param {*} value Valor del atributo
  */
-function attribute(element, attribute, value) {
+export function attribute(element, attribute, value) {
     element.setAttribute(attribute, value);
 }
 
@@ -130,10 +131,11 @@ function createButton(e, iconSrc) {
 
 /**
  * Muestra el loader
+ * @param {*} e Elemento del DOM
  */
-export function displayLoader() {
-    element(main, 'div');
-    attribute(main.lastElementChild, 'class', 'loader');
+export function displayLoader(e) {
+    element(e, 'div');
+    attribute(e.lastElementChild, 'class', 'loader');
 }
 
 /**
@@ -192,7 +194,7 @@ function shopMenu() {
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'id', 'searchInput');
     createButton(main.lastElementChild.lastElementChild, 'img/search.svg');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'searchButton');
-    main.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { getTienda(requestTypeValue) });
+    main.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { searchButton() });
 }
 
 /**
@@ -337,4 +339,25 @@ function editShop(e) {
  */
 function deleteShop(e) {
     confirm('¿Seguro que quiere borrar la tienda ' + e.nombreTienda + '?') ? deleteTienda(requestTypeValue, e.idTienda) : null;
+}
+
+/**
+ * 
+ */
+function searchButton() {
+    let searchButton = document.getElementsByClassName('searchButton')[0];
+    if(document.getElementById('searchInput').value != '' && searchValue == 0) {
+        searchButton.lastElementChild.remove();
+        displayLoader(searchButton);
+        let loader = document.getElementsByClassName('loader')[0];
+        loader.style = "height: 8px; width: 8px;"
+        getTienda(requestTypeValue)
+        searchValue++;
+    } else if(searchValue == 1) {
+        searchButton.textContent = '';
+        element(searchButton, 'img');
+        attribute(searchButton.lastElementChild, 'src', 'img/search.svg');
+        getTiendas(requestTypeValue);
+        searchValue--;
+    }
 }

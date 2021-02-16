@@ -1,5 +1,7 @@
 import { requestTypeValue, inputError, inputSuccess } from './functions.js';
-import { postTienda, putTienda } from './requests.js';
+import { getTienda, postTienda, putTienda } from './requests.js';
+
+var normal = "border-color: black; box-shadow: none; ";
 
 export function checkShopName() {
     let input = document.getElementById('nombreTienda');
@@ -110,6 +112,10 @@ export function checkFormSubmit(e) {
         };
         postTienda(requestTypeValue, formData);
         form.reset();
+        document.getElementById('nombreTienda').style = normal;
+        document.getElementById('direccion').style = normal;
+        document.getElementById('localidad').style = normal;
+        document.getElementById('telefono').style = normal;
     } else {
         checkShopName();
         checkShopAdress();
