@@ -132,7 +132,6 @@ export function checkEditFormSubmit(e, idTienda) {
         putTienda(requestTypeValue, formData);
         form.reset();
     } else {
-        console.log(e)
         checkEditShopName();
         checkEditShopAdress();
         checkEditShopLocation();

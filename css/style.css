@@ -73,7 +73,7 @@ main {
   .newShopMenu .searchButton:disabled {
     border: 2px solid #83bc80;
     color: #83bc80; }
-  .newShopMenu .searchInput {
+  .newShopMenu #searchInput {
     border-radius: 0.5em;
     border: 2px solid #3b6b38;
     padding: 0.5em;

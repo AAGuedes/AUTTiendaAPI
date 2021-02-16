@@ -91,6 +91,7 @@ function requestMenu() {
         main.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => {
             main.firstElementChild.remove();
             requestTypeValue = i;
+            mainMenu();
             getTiendas(requestTypeValue);    
         })
     }
@@ -146,15 +147,21 @@ export function hideLoader() {
  * Borra las tiendas del main
  */
 export function cleanMain() {
-    [...document.getElementsByClassName('shop')].forEach(e => { e.remove() })
+    [...document.getElementsByClassName('shop')].forEach(e => { e.remove(); });
+}
+
+/**
+ * 
+ */
+export function mainMenu() {
+    shopMenu();
+    shopForm();
 }
 
 /**
  * Crea la lista de tiendas en el DOM
  */
-export function shopList(response) {
-    shopMenu();
-    shopForm();
+export function listShops(response) {
     response.forEach(e => {
         shop(e);
     });
@@ -180,9 +187,9 @@ function shopMenu() {
     main.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { newShop() });
     element(main.lastElementChild, 'div');
     element(main.lastElementChild.lastElementChild, 'input');
-    attribute(main.lastElementChild.lastElementChild.lastElementChild, 'type', 'text');
+    attribute(main.lastElementChild.lastElementChild.lastElementChild, 'type', 'number');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'placeholder', 'ID de Tienda');
-    attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'searchInput');
+    attribute(main.lastElementChild.lastElementChild.lastElementChild, 'id', 'searchInput');
     createButton(main.lastElementChild.lastElementChild, 'img/search.svg');
     attribute(main.lastElementChild.lastElementChild.lastElementChild, 'class', 'searchButton');
     main.lastElementChild.lastElementChild.lastElementChild.addEventListener('click', () => { getTienda(requestTypeValue) });
@@ -329,5 +336,5 @@ function editShop(e) {
  * @param {*} e Evento
  */
 function deleteShop(e) {
-    confirm('¿Seguro que quiere borrar la tienda' + e.nombreTienda + '?') ? deleteTienda(requestTypeValue, e.idTienda) : null;
+    confirm('¿Seguro que quiere borrar la tienda ' + e.nombreTienda + '?') ? deleteTienda(requestTypeValue, e.idTienda) : null;
 }
