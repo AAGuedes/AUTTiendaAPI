@@ -70,6 +70,7 @@ export function getTienda(requestTypeValue) {
                     hideLoader()
                     let searchButton = document.getElementsByClassName('searchButton')[0];
                     searchButton.textContent = 'X';
+                    searchButton.disabled = false;
                 }
             }
             xhr.open('GET', tiendas + '/' + id);
@@ -84,6 +85,7 @@ export function getTienda(requestTypeValue) {
                 hideLoader();
                 let searchButton = document.getElementsByClassName('searchButton')[0];
                 searchButton.textContent = 'X';
+                searchButton.disabled = false;
         })
             break;
         // JQUERY
@@ -97,6 +99,7 @@ export function getTienda(requestTypeValue) {
                     hideLoader();
                     let searchButton = document.getElementsByClassName('searchButton')[0];
                     searchButton.textContent = 'X';
+                    searchButton.disabled = false;
                 }
             })
             break;

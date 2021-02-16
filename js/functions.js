@@ -281,7 +281,12 @@ export function notFound() {
  * Despliega el formulario para crear una nueva tienda
  */
 function newShop() {
-    console.log('New shop')
+    let container = document.getElementsByClassName('newShopContainer')[0];
+    if(container.style.display == 'none') {
+        container.style.display = 'block';
+    } else {
+        container.style.display = 'none';
+    }
 }
 
 /**
@@ -347,6 +352,7 @@ function deleteShop(e) {
 function searchButton() {
     let searchButton = document.getElementsByClassName('searchButton')[0];
     if(document.getElementById('searchInput').value != '' && searchValue == 0) {
+        searchButton.disabled = true;
         searchButton.lastElementChild.remove();
         displayLoader(searchButton);
         let loader = document.getElementsByClassName('loader')[0];

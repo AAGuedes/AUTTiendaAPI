@@ -5,14 +5,14 @@ $main-color: #daeecc
 $main-text-color: #3b6b38
 
 @font-face
-    font-family: 'Open Sans'
+    font-family: Open Sans
     font-style: normal
-    font-weight: 400
-    src: url('../fonts/open-sans-v18-latin-regular.woff') format('woff')
+    src: url('../fonts/open-sans-v18-latin-regular.ttf')
 
 *
     margin: 0
     padding: 0
+    font-family: Open Sans
 
 html, body
     height: 100%
@@ -97,6 +97,7 @@ main
 
 // NEW SHOP FORM
 .newShopContainer
+    display: none
     border: 2px solid darken($main-color, 10%)
     border-radius: 0.5em
     padding: 0.5em
@@ -136,6 +137,7 @@ main
 // SHOP
 .shop
     border: 2px solid darken($main-color, 10%)
+    box-shadow: 5px 5px rgba(darken($main-color, 10%), 0.50)
     border-radius: 0.5em
     padding: 0.5em
     margin: 0.5em 0

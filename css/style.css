@@ -1,12 +1,12 @@
 @font-face {
-  font-family: 'Open Sans';
+  font-family: Open Sans;
   font-style: normal;
-  font-weight: 400;
-  src: url("../fonts/open-sans-v18-latin-regular.woff") format("woff"); }
+  src: url("../fonts/open-sans-v18-latin-regular.ttf"); }
 
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  font-family: Open Sans; }
 
 html, body {
   height: 100%; }
@@ -83,6 +83,7 @@ main {
     height: 12px; }
 
 .newShopContainer {
+  display: none;
   border: 2px solid #bee1a6;
   border-radius: 0.5em;
   padding: 0.5em;
@@ -131,6 +132,7 @@ main {
 
 .shop {
   border: 2px solid #bee1a6;
+  box-shadow: 5px 5px rgba(190, 225, 166, 0.5);
   border-radius: 0.5em;
   padding: 0.5em;
   margin: 0.5em 0; }
